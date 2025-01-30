@@ -1,4 +1,4 @@
-function App() {
+const App = () => {
   return (
     <a
       className="App-link"
@@ -9,6 +9,6 @@ function App() {
       Learn React
     </a>
   );
-}
+};
 
 export default App;
