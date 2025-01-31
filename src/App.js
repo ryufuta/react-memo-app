@@ -1,20 +1,35 @@
 import { useState } from "react";
 
-const MEMOS = [
-  { id: 0, title: "今日やること", body: "メモアプリ実装\n散歩" },
-  { id: 1, title: "明日やること", body: "メモアプリテスト" },
-];
-let lastId = 1;
+const getMemos = () => JSON.parse(localStorage.getItem("memos")) ?? [];
+
+const createMemo = (memos, text) => {
+  const lastId = parseInt(localStorage.getItem("lastId"));
+  const id = Number.isNaN(lastId) ? 0 : lastId + 1;
+  const newMemos = [...memos, { id, text }];
+  localStorage.setItem("memos", JSON.stringify(newMemos));
+  localStorage.setItem("lastId", String(id));
+};
+
+const updateMemo = (memos, id, text) => {
+  const newMemos = memos.map((memo) => (memo.id === id ? { id, text } : memo));
+  localStorage.setItem("memos", JSON.stringify(newMemos));
+};
+
+const deleteMemo = (memos, id) => {
+  const newMemos = memos.filter((memo) => memo.id !== id);
+  localStorage.setItem("memos", JSON.stringify(newMemos));
+};
 
 const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [memos, setMemos] = useState(MEMOS);
   const [text, setText] = useState("");
+
+  const memos = getMemos();
 
   const onClickMemo = (memo) => {
     setSelectedId(memo.id);
-    setText(`${memo.title}\n${memo.body}`);
+    setText(memo.text);
     setIsEditing(true);
   };
 
@@ -28,25 +43,17 @@ const App = () => {
   };
 
   const onClickEdit = () => {
-    const [title, ...bodyRows] = text.split("\n");
-    const body = bodyRows.join("\n");
-    let newMemos;
     if (selectedId === null) {
-      lastId++;
-      newMemos = [...memos, { id: lastId, title, body }];
+      createMemo(memos, text);
     } else {
-      newMemos = memos.map((memo) =>
-        memo.id === selectedId ? { id: memo.id, title, body } : memo,
-      );
+      updateMemo(memos, selectedId, text);
     }
-    setMemos(newMemos);
     setSelectedId(null);
     setIsEditing(false);
   };
 
   const onClickDelete = () => {
-    const newMemos = memos.filter((memo) => memo.id !== selectedId);
-    setMemos(newMemos);
+    deleteMemo(memos, selectedId);
     setSelectedId(null);
     setIsEditing(false);
   };
@@ -72,7 +79,7 @@ const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
                 onClickMemo(memo);
               }}
             >
-              {memo.title}
+              {memo.text.split("\n")[0]}
             </a>
           </li>
         ))}
