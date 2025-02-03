@@ -1,24 +1,7 @@
 import { useState } from "react";
-
-const getMemos = () => JSON.parse(localStorage.getItem("memos")) ?? [];
-
-const createMemo = (memos, text) => {
-  const lastId = parseInt(localStorage.getItem("lastId"));
-  const id = Number.isNaN(lastId) ? 0 : lastId + 1;
-  const newMemos = [...memos, { id, text }];
-  localStorage.setItem("memos", JSON.stringify(newMemos));
-  localStorage.setItem("lastId", String(id));
-};
-
-const updateMemo = (memos, id, text) => {
-  const newMemos = memos.map((memo) => (memo.id === id ? { id, text } : memo));
-  localStorage.setItem("memos", JSON.stringify(newMemos));
-};
-
-const deleteMemo = (memos, id) => {
-  const newMemos = memos.filter((memo) => memo.id !== id);
-  localStorage.setItem("memos", JSON.stringify(newMemos));
-};
+import { getMemos, createMemo, updateMemo, deleteMemo } from "./storage.js";
+import { Editor } from "./Editor.js";
+import { MemoList } from "./MemoList.js";
 
 const App = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -64,37 +47,6 @@ const App = () => {
       {isEditing && (
         <Editor {...{ text, onChangeText, onClickEdit, onClickDelete }} />
       )}
-    </>
-  );
-};
-
-const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
-  return (
-    <>
-      <ul>
-        {memos.map((memo) => (
-          <li key={memo.id}>
-            <a
-              onClick={() => {
-                onClickMemo(memo);
-              }}
-            >
-              {memo.text.split("\n")[0]}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <button onClick={onClickAdd}>+</button>
-    </>
-  );
-};
-
-const Editor = ({ text, onChangeText, onClickEdit, onClickDelete }) => {
-  return (
-    <>
-      <textarea value={text} onChange={onChangeText} />
-      <button onClick={onClickEdit}>編集</button>
-      <button onClick={onClickDelete}>削除</button>
     </>
   );
 };
