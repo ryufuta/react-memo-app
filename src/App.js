@@ -25,7 +25,7 @@ const App = () => {
     setText(e.target.value);
   };
 
-  const onClickEdit = () => {
+  const onClickUpdate = () => {
     if (selectedId === null) {
       createMemo(memos, text);
     } else {
@@ -45,7 +45,7 @@ const App = () => {
     <>
       <MemoList {...{ memos, onClickMemo, onClickAdd }} />
       {isEditing && (
-        <Editor {...{ text, onChangeText, onClickEdit, onClickDelete }} />
+        <Editor {...{ text, onChangeText, onClickUpdate, onClickDelete }} />
       )}
     </>
   );
