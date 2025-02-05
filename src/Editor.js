@@ -1,3 +1,5 @@
+import "./Editor.css";
+
 export const Editor = ({
   text,
   onChangeText,
@@ -5,10 +7,14 @@ export const Editor = ({
   onClickDelete,
 }) => {
   return (
-    <>
-      <textarea value={text} onChange={onChangeText} />
-      <button onClick={onClickUpdate}>更新</button>
-      <button onClick={onClickDelete}>削除</button>
-    </>
+    <div className="editor">
+      <div>
+        <textarea cols={30} rows={10} value={text} onChange={onChangeText} />
+      </div>
+      <div>
+        <button onClick={onClickUpdate}>更新</button>
+        <button onClick={onClickDelete}>削除</button>
+      </div>
+    </div>
   );
 };

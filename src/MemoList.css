@@ -1,0 +1,23 @@
+.memo-list {
+  width: 50%;
+  padding: 10px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.memo-item {
+  all: unset;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.memo-item:hover {
+  text-decoration: none;
+}

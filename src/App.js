@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getMemos, createMemo, updateMemo, deleteMemo } from "./storage.js";
 import { Editor } from "./Editor.js";
 import { MemoList } from "./MemoList.js";
+import "./App.css";
 
 const App = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -42,12 +43,12 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="container">
       <MemoList {...{ memos, onClickMemo, onClickAdd }} />
       {isEditing && (
         <Editor {...{ text, onChangeText, onClickUpdate, onClickDelete }} />
       )}
-    </>
+    </div>
   );
 };
 
