@@ -18,6 +18,7 @@ const App = () => {
   };
 
   const onClickAdd = () => {
+    setSelectedId(null);
     setText("新規メモ");
     setIsEditing(true);
   };
