@@ -51,9 +51,11 @@ const App = () => {
 
   return (
     <>
-      <button onClick={onClickLogin}>
-        {isLoggedIn ? "ログアウト" : "ログイン"}
-      </button>
+      <header>
+        <button onClick={onClickLogin}>
+          {isLoggedIn ? "ログアウト" : "ログイン"}
+        </button>
+      </header>
       <LoginContext.Provider value={isLoggedIn}>
         <div className="container">
           <MemoList {...{ memos, onClickMemo, onClickAdd }} />
