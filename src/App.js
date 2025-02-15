@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getMemos, createMemo, updateMemo, deleteMemo } from "./storage.js";
 import { Editor } from "./Editor.js";
 import { MemoList } from "./MemoList.js";
+import { LoginContext } from "./Context.js";
 import "./App.css";
 
 const App = () => {
@@ -53,20 +54,21 @@ const App = () => {
       <button onClick={onClickLogin}>
         {isLoggedIn ? "ログアウト" : "ログイン"}
       </button>
-      <div className="container">
-        <MemoList {...{ memos, onClickMemo, onClickAdd, isLoggedIn }} />
-        {isEditing && (
-          <Editor
-            {...{
-              text,
-              onChangeText,
-              onClickUpdate,
-              onClickDelete,
-              isLoggedIn,
-            }}
-          />
-        )}
-      </div>
+      <LoginContext.Provider value={isLoggedIn}>
+        <div className="container">
+          <MemoList {...{ memos, onClickMemo, onClickAdd }} />
+          {isEditing && (
+            <Editor
+              {...{
+                text,
+                onChangeText,
+                onClickUpdate,
+                onClickDelete,
+              }}
+            />
+          )}
+        </div>
+      </LoginContext.Provider>
     </>
   );
 };
