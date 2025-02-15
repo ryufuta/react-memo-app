@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getMemos, createMemo, updateMemo, deleteMemo } from "./storage.js";
 import { Editor } from "./Editor.js";
 import { MemoList } from "./MemoList.js";
-import { LoginProvider } from "./Context.js";
+import { LoginProvider } from "./login.js";
 import "./App.css";
 
 const App = () => {
