@@ -5,11 +5,16 @@ import { MemoList } from "./MemoList.js";
 import "./App.css";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [text, setText] = useState("");
 
   const memos = getMemos();
+
+  const onClickLogin = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
 
   const onClickMemo = (memo) => {
     setSelectedId(memo.id);
@@ -44,12 +49,25 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <MemoList {...{ memos, onClickMemo, onClickAdd }} />
-      {isEditing && (
-        <Editor {...{ text, onChangeText, onClickUpdate, onClickDelete }} />
-      )}
-    </div>
+    <>
+      <button onClick={onClickLogin}>
+        {isLoggedIn ? "ログアウト" : "ログイン"}
+      </button>
+      <div className="container">
+        <MemoList {...{ memos, onClickMemo, onClickAdd, isLoggedIn }} />
+        {isEditing && (
+          <Editor
+            {...{
+              text,
+              onChangeText,
+              onClickUpdate,
+              onClickDelete,
+              isLoggedIn,
+            }}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

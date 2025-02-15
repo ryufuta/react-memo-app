@@ -5,16 +5,25 @@ export const Editor = ({
   onChangeText,
   onClickUpdate,
   onClickDelete,
+  isLoggedIn,
 }) => {
   return (
     <div className="editor">
       <div>
-        <textarea cols={30} rows={10} value={text} onChange={onChangeText} />
+        <textarea
+          cols={30}
+          rows={10}
+          value={text}
+          onChange={onChangeText}
+          readOnly={!isLoggedIn}
+        />
       </div>
-      <div>
-        <button onClick={onClickUpdate}>更新</button>
-        <button onClick={onClickDelete}>削除</button>
-      </div>
+      {isLoggedIn && (
+        <div>
+          <button onClick={onClickUpdate}>更新</button>
+          <button onClick={onClickDelete}>削除</button>
+        </div>
+      )}
     </div>
   );
 };

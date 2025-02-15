@@ -1,6 +1,6 @@
 import "./MemoList.css";
 
-export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
+export const MemoList = ({ memos, onClickMemo, onClickAdd, isLoggedIn }) => {
   return (
     <div className="memo-list">
       <ul>
@@ -17,7 +17,7 @@ export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
           </li>
         ))}
       </ul>
-      <button onClick={onClickAdd}>+</button>
+      {isLoggedIn && <button onClick={onClickAdd}>+</button>}
     </div>
   );
 };
