@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { LoginContext } from "./Context.js";
+import { useLogin } from "./Context.js";
 import "./Editor.css";
 
 export const Editor = ({
@@ -8,7 +7,7 @@ export const Editor = ({
   onClickUpdate,
   onClickDelete,
 }) => {
-  const isLoggedIn = useContext(LoginContext);
+  const isLoggedIn = useLogin();
   return (
     <div className="editor">
       <div>

@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { LoginContext } from "./Context.js";
+import { useLogin } from "./Context.js";
 import "./MemoList.css";
 
 export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
-  const isLoggedIn = useContext(LoginContext);
+  const isLoggedIn = useLogin();
   return (
     <div className="memo-list">
       <ul>
