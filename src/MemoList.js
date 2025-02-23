@@ -2,7 +2,7 @@ import { useLogin } from "./login.js";
 import "./MemoList.css";
 
 export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
-  const isLoggedIn = useLogin();
+  const { isLoggedIn } = useLogin();
   return (
     <div className="memo-list">
       <ul>

@@ -5,21 +5,18 @@ const LoginContext = createContext(false);
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const onClickLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
+  const logIn = () => {
+    setIsLoggedIn(true);
+  };
+
+  const logOut = () => {
+    setIsLoggedIn(false);
   };
 
   return (
-    <>
-      <header>
-        <button onClick={onClickLogin}>
-          {isLoggedIn ? "ログアウト" : "ログイン"}
-        </button>
-      </header>
-      <LoginContext.Provider value={isLoggedIn}>
-        {children}
-      </LoginContext.Provider>
-    </>
+    <LoginContext.Provider value={{ isLoggedIn, logIn, logOut }}>
+      {children}
+    </LoginContext.Provider>
   );
 };
 

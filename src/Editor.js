@@ -7,7 +7,7 @@ export const Editor = ({
   onClickUpdate,
   onClickDelete,
 }) => {
-  const isLoggedIn = useLogin();
+  const { isLoggedIn } = useLogin();
   return (
     <div className="editor">
       <div>
