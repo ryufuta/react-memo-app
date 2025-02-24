@@ -2,6 +2,8 @@ import { useState } from "react";
 import { getMemos, createMemo, updateMemo, deleteMemo } from "./storage.js";
 import { Editor } from "./Editor.js";
 import { MemoList } from "./MemoList.js";
+import { Header } from "./Header.js";
+import { LoginProvider } from "./login.js";
 import "./App.css";
 
 const App = () => {
@@ -44,12 +46,22 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <MemoList {...{ memos, onClickMemo, onClickAdd }} />
-      {isEditing && (
-        <Editor {...{ text, onChangeText, onClickUpdate, onClickDelete }} />
-      )}
-    </div>
+    <LoginProvider>
+      <Header />
+      <div className="container">
+        <MemoList {...{ memos, onClickMemo, onClickAdd }} />
+        {isEditing && (
+          <Editor
+            {...{
+              text,
+              onChangeText,
+              onClickUpdate,
+              onClickDelete,
+            }}
+          />
+        )}
+      </div>
+    </LoginProvider>
   );
 };
 

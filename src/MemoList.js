@@ -1,6 +1,8 @@
+import { useLogin } from "./login.js";
 import "./MemoList.css";
 
 export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
+  const { isLoggedIn } = useLogin();
   return (
     <div className="memo-list">
       <ul>
@@ -17,7 +19,7 @@ export const MemoList = ({ memos, onClickMemo, onClickAdd }) => {
           </li>
         ))}
       </ul>
-      <button onClick={onClickAdd}>+</button>
+      {isLoggedIn && <button onClick={onClickAdd}>+</button>}
     </div>
   );
 };

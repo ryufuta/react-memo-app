@@ -3,3 +3,7 @@
   align-items: flex-start;
   margin: 20px auto;
 }
+
+header {
+  text-align: right;
+}
